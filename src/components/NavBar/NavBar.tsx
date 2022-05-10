@@ -22,7 +22,7 @@ export const NavBar = ({ theme }: NavBarProps) => {
       <Box display="flex" alignItems="center">
         <Logo />
         <Heading as="h3" size="lg" ml={2}>
-          Stock Comparator (Test)
+          Stock Comparator
         </Heading>
       </Box>
       <Box>
