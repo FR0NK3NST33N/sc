@@ -2,8 +2,10 @@ name: S3 Deploy
 
 on:
   push:
-    branches:
-      - master
+    branches: [main]
+  workflow_run:
+    workflows: ["BUILD"]
+    types: [completed]
 
 jobs:
   deploy:
