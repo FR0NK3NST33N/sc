@@ -25,4 +25,8 @@ jobs:
           cache: "npm"
       - run: npm ci
       - run: npm run build
-      # - run: npm run test
+      - name: Upload dist
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist
