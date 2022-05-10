@@ -1,15 +1,7 @@
-import { Box, Heading, Input, Tab, TabList, Tabs } from "@chakra-ui/react";
-import AsyncSelect from "react-select/async";
-import Select, {
-  components,
-  ControlProps,
-  DropdownIndicatorProps,
-} from "react-select";
+import { Box, Tab, TabList, Tabs } from "@chakra-ui/react";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { Autocomplete, LayoutTheme, Logo } from "..";
-import { MdSearch } from "react-icons/md";
-import { useAlphaVantage } from "../../services";
 
 export interface TabBarProps {
   handleViewChange: () => void;
@@ -24,7 +16,6 @@ export const TabBar = ({
 }: TabBarProps) => {
   const subNavRef = useRef<HTMLDivElement>(null);
   const controls = useAnimation();
-  const { search } = useAlphaVantage();
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -59,6 +50,7 @@ export const TabBar = ({
       <Box
         display="flex"
         flexDirection={{ base: "column", sm: "column", md: "row" }}
+        flexGrow={1}
       >
         <Box display="flex">
           <motion.div

@@ -12,23 +12,22 @@ import { ApiLimitResponse } from ".";
 
 export const useAlphaVantage = () => {
   const toast = useToast();
+  const API_KEY = import.meta.env.VITE_API_KEY ?? FALLBACK_API_KEY; //vite specific for handling env
 
   const search = async (inputValue: string): Promise<SearchResponse[]> => {
     try {
-      //vite specific for handling env
       const results: AlphaVantageSearchResponse = await axios.get(
-        `${BASE_URL}/query?function=SYMBOL_SEARCH&keywords=${inputValue.toUpperCase()}&apikey=${
-          import.meta.env.VITE_API_KEY ?? FALLBACK_API_KEY
-        }`
+        `${BASE_URL}/query?function=SYMBOL_SEARCH&keywords=${inputValue.toUpperCase()}&apikey=${API_KEY}`
       );
-      if (results.data.Note) throw Error("The API limit was reached");
       if (results.status !== 200)
         throw Error("The call to AlphaVantage failed");
+      if (results.data.Note) throw Error("The API limit was reached");
+
       return results.data.bestMatches.map((obj) => ({
         value: obj["1. symbol"],
         label: `${obj["1. symbol"]} - ${obj["2. name"]}`,
       }));
-    } catch (err: any | undefined) {
+    } catch (err: any) {
       toast({
         title: "Whoops, something went wrong!",
         description: `${err}`,
@@ -47,22 +46,21 @@ export const useAlphaVantage = () => {
         data: overViewResults,
         status: overviewStatus,
       }: AlphaVantageOverviewResponse = await axios.get(
-        `${BASE_URL}/query?function=OVERVIEW&symbol=${symbol.toUpperCase()}&apikey=${
-          import.meta.env.VITE_API_KEY ?? FALLBACK_API_KEY
-        }`
+        `${BASE_URL}/query?function=OVERVIEW&symbol=${symbol.toUpperCase()}&apikey=${API_KEY}`
       );
+      if (overviewStatus !== 200)
+        throw Error("The call to AlphaVantage failed");
       if (overViewResults.Note) throw Error("The API limit was reached");
+
       const {
         data: quoteResults,
         status: quoteStatus,
       }: AlphaVantageQuoteResponse = await axios.get(
-        `${BASE_URL}/query?function=GLOBAL_QUOTE&symbol=${symbol.toUpperCase()}&apikey=${
-          import.meta.env.VITE_API_KEY ?? FALLBACK_API_KEY
-        }`
+        `${BASE_URL}/query?function=GLOBAL_QUOTE&symbol=${symbol.toUpperCase()}&apikey=${API_KEY}`
       );
+      if (quoteStatus !== 200) throw Error("The call to AlphaVantage failed");
       if (quoteResults.Note) throw Error("The API limit was reached");
-      if (overviewStatus !== 200 || quoteStatus !== 200)
-        throw Error("The call to AlphaVantage failed");
+
       return {
         symbol: overViewResults.Symbol,
         name: overViewResults.Name,
@@ -77,7 +75,7 @@ export const useAlphaVantage = () => {
           changePercent: quoteResults["Global Quote"]["10. change percent"],
         },
       };
-    } catch (err: any | undefined) {
+    } catch (err: any) {
       toast({
         title: "Whoops, something went wrong!",
         description: `${err}`,

@@ -36,9 +36,6 @@ export const Autocomplete = ({ handleSelect }: AutocompleteProps) => {
       borderStyle: "solid",
       minWidth: 250,
       flexGrow: 1,
-      //   flexShrink: 1,
-      //   //flexBasis: "auto",
-      //   maxWidth: "100%",
       display: "flex",
       marginRight: "15px",
     }),
@@ -70,8 +67,8 @@ export const Autocomplete = ({ handleSelect }: AutocompleteProps) => {
       cacheOptions
       defaultOptions={[]}
       styles={customStyles}
-      onChange={(selected) => {
-        const { value } = selected as any; //idk why this was needed yet
+      onChange={(selected: any) => {
+        const { value } = selected;
         handleSelect(`${value}`);
         setSelectedValue(null); // clear react-select input value after selection
       }}
