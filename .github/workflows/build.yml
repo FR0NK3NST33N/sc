@@ -1,5 +1,8 @@
 name: Build
 
+env:
+  VITE_API_KEY: ${{ secrets.API_KEY }}
+
 on:
   push:
     branches: [main]
