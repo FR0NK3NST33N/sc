@@ -1,11 +1,7 @@
 import { useState } from "react";
+import { Views } from "./models";
 
-export enum Views {
-  card = "card",
-  list = "list",
-}
-
-export const useLayout = () => {
+export const useView = () => {
   const [view, setView] = useState(Views.card);
 
   const handleViewChange = () => {

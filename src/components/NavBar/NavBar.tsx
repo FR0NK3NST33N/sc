@@ -1,3 +1,4 @@
+import React from "react";
 import { Box, Button, Heading } from "@chakra-ui/react";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { Logo, LayoutTheme } from "..";

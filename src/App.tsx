@@ -1,13 +1,15 @@
+import React from "react";
 import { CardView, ListView, Views } from "./views";
-import { Layout, useLayout } from "./components";
+import { Layout } from "./components";
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import { useAlphaVantage, StockResponse } from "./services";
+import { useView } from "./views/useView";
 
 function App() {
   const stocks = localStorage.getItem("stocks");
   const toast = useToast();
-  const { view, handleViewChange } = useLayout();
+  const { view, handleViewChange } = useView();
   const { stock } = useAlphaVantage();
   const [selectedStocks, setSelectedStocks] = useState<
     StockResponse[] | undefined

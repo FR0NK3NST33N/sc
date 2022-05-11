@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Box,
   Heading,
@@ -19,7 +20,7 @@ export interface CardViewProps {
 export const CardView = ({ stocks, handleRemove }: CardViewProps) => {
   return (
     <>
-      {!stocks && <EmptyView view="card" />}
+      {!stocks && <EmptyView />}
       {stocks && (
         <SimpleGrid
           columns={{ sm: 1, md: 2, lg: 3 }}
@@ -55,9 +56,17 @@ export const CardView = ({ stocks, handleRemove }: CardViewProps) => {
               </Box>
               <Box display="flex" alignItems="center" mt={4}>
                 {stock.globalQuote.changePercent.startsWith("-") ? (
-                  <MdArrowDownward size="36px" color="#F56565" />
+                  <MdArrowDownward
+                    size="36px"
+                    color="#F56565"
+                    aria-label="downIcon"
+                  />
                 ) : (
-                  <MdArrowUpward size="36px" color="#48BB78" />
+                  <MdArrowUpward
+                    size="36px"
+                    color="#48BB78"
+                    aria-label="upIcon"
+                  />
                 )}
                 <Heading>{`$${Number(stock.globalQuote.price).toFixed(
                   2

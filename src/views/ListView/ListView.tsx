@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Table,
   Thead,
@@ -7,8 +8,6 @@ import {
   Td,
   useColorModeValue,
   CloseButton,
-  Text,
-  Box,
   TableContainer,
 } from "@chakra-ui/react";
 import { EmptyView } from "..";
@@ -23,7 +22,7 @@ export const ListView = ({ stocks, handleRemove }: ListViewProps) => {
   const bg = useColorModeValue("white", "gray.800");
   return (
     <>
-      {!stocks && <EmptyView view="list" />}
+      {!stocks && <EmptyView />}
       {stocks && (
         <TableContainer
           overflowY="auto"

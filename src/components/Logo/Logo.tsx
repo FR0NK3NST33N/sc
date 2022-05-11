@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface LogoProps {
   fill?: string;
   tabBarVariant?: boolean;

@@ -1,3 +1,4 @@
+import React from "react";
 import { Box, Tab, TabList, Tabs } from "@chakra-ui/react";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";

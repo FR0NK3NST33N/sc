@@ -1,10 +1,7 @@
+import React from "react";
 import { Box, Heading } from "@chakra-ui/react";
 
-export interface EmptyViewProps {
-  view: string;
-}
-
-export const EmptyView = ({ view }: EmptyViewProps) => {
+export const EmptyView = () => {
   return (
     <Box
       height="100vh"

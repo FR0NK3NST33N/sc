@@ -1,3 +1,4 @@
+import React from "react";
 import { useColorModeValue } from "@chakra-ui/react";
 import { useState } from "react";
 import { MdSearch } from "react-icons/md";
@@ -24,12 +25,12 @@ export const Autocomplete = ({ handleSelect }: AutocompleteProps) => {
   };
 
   const customStyles = {
-    option: (provided: any, state: any) => ({
+    option: (provided: any) => ({
       ...provided,
       padding: 20,
       color: "#1A202C",
     }),
-    control: (provided: any) => ({
+    control: () => ({
       border: "0.5px",
       borderRadius: "5px",
       borderColor: borderColor,

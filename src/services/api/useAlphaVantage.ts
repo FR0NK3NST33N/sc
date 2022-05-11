@@ -8,7 +8,6 @@ import {
   SearchResponse,
   StockResponse,
 } from "./models";
-import { ApiLimitResponse } from ".";
 
 export const useAlphaVantage = () => {
   const toast = useToast();
