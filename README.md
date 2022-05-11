@@ -18,6 +18,10 @@
 - Add view to local storage
 - Think about ways to cache as much as possible for API Limit reasons
 
+# Known bug with Alphavantage
+
+`function=OVERVIEW` with a symbol param featuring a `.` will return an empty result
+
 ### Running
 
 ```
