@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { CardView } from "..";
+import { ListView } from "..";
 
 const negativeStock = [
   {
@@ -39,7 +39,7 @@ const positiveStock = [
 describe("CardView Tests", () => {
   test("Empty View Renders", () => {
     render(
-      <CardView
+      <ListView
         stocks={undefined}
         handleRemove={() => {
           return;
@@ -50,9 +50,9 @@ describe("CardView Tests", () => {
     const heading = screen.getByText("No Stocks Selected");
     expect(heading).toBeInTheDocument();
   });
-  test("Card Renders", () => {
-    render(
-      <CardView
+  test("Table Renders", () => {
+    const { container } = render(
+      <ListView
         stocks={negativeStock}
         handleRemove={() => {
           return;
@@ -60,12 +60,12 @@ describe("CardView Tests", () => {
       />
     );
 
-    const heading = screen.getByText("R - Ryder System Inc");
-    expect(heading).toBeInTheDocument();
+    const table = container.querySelector("table");
+    expect(table).toBeInTheDocument();
   });
-  test("Red Arrow Down Renders", () => {
+  test("Table Renders Appropriate Row Count", () => {
     const { container } = render(
-      <CardView
+      <ListView
         stocks={negativeStock}
         handleRemove={() => {
           return;
@@ -73,22 +73,7 @@ describe("CardView Tests", () => {
       />
     );
 
-    const icon = container.querySelector('svg[aria-label="downIcon"]');
-    expect(icon).toBeInTheDocument();
-    expect(icon).toHaveAttribute("color", "#F56565");
-  });
-  test("Green Arrow Up Renders", () => {
-    const { container } = render(
-      <CardView
-        stocks={positiveStock}
-        handleRemove={() => {
-          return;
-        }}
-      />
-    );
-
-    const icon = container.querySelector('svg[aria-label="upIcon"]');
-    expect(icon).toBeInTheDocument();
-    expect(icon).toHaveAttribute("color", "#48BB78");
+    const tableRows = container.querySelectorAll("tbody tr");
+    expect(tableRows.length).toEqual(1);
   });
 });
