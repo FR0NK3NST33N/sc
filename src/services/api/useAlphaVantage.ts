@@ -8,6 +8,7 @@ import {
   SearchResponse,
   StockResponse,
 } from "./models";
+import { isEmpty } from "lodash";
 
 export const useAlphaVantage = () => {
   const toast = useToast();
@@ -50,6 +51,8 @@ export const useAlphaVantage = () => {
       if (overviewStatus !== 200)
         throw Error("The call to AlphaVantage failed");
       if (overViewResults.Note) throw Error("The API limit was reached");
+      if (isEmpty(overViewResults))
+        throw Error("The API returned an empty response");
 
       const {
         data: quoteResults,
