@@ -21,28 +21,24 @@
 ### Running
 
 ```
-> npm i
 > npm run dev
 ```
 
 ### Build
 
 ```
-> npm i
 > npm run build
 ```
 
 ### Lint
 
 ```
-> npm i
 > npm run lint
 ```
 
 ### Test
 
 ```
-> npm i
 > npm run test
 ```
 
