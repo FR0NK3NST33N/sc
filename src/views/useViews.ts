@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Views } from "./models";
 
-export const useView = () => {
+export const useViews = () => {
   const [view, setView] = useState(Views.card);
 
   const handleViewChange = () => {
