@@ -17,7 +17,6 @@
   - Modals?
 - Add view to local storage
 - Think about ways to cache as much as possible for API Limit reasons
-- Debouce search
 
 ### Running
 

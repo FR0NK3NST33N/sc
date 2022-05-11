@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useColorModeValue } from "@chakra-ui/react";
 import { useState } from "react";
 import { MdSearch } from "react-icons/md";
 import { components, DropdownIndicatorProps } from "react-select";
 import AsyncSelect from "react-select/async";
+import { debounce } from "lodash";
 import { useAlphaVantage } from "../../services";
 
 export interface AutocompleteProps {
@@ -57,11 +58,18 @@ export const Autocomplete = ({ handleSelect }: AutocompleteProps) => {
     }),
   };
 
+  const debouncedSearch = useCallback(
+    debounce((inputValue, callback) => {
+      search(inputValue).then((options) => callback(options));
+    }, 500),
+    []
+  );
+
   return (
     <AsyncSelect
       value={selectedValue}
       closeMenuOnSelect={true}
-      loadOptions={search}
+      loadOptions={debouncedSearch}
       placeholder={"Search"}
       noOptionsMessage={() => "No Stocks Found"}
       components={{ DropdownIndicator }}
